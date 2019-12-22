@@ -97,6 +97,33 @@ export default {
           name: '',
           path: '/theme',
           label: '主题配置'
+        },
+        {
+          name: '',
+          path: '/permission',
+          label: '页面权限',
+          children: [
+            {
+              name: '',
+              path: '/permission/page',
+              label: '页面权限'
+            },
+            {
+              name: '',
+              path: '/permission/role',
+              label: '角色权限'
+            },
+            {
+              name: '',
+              path: '/permission/menu',
+              label: '动态菜单'
+            },
+            {
+              name: '',
+              path: '/permission/login',
+              label: '登录权限'
+            }
+          ]
         }
       ]
     }
