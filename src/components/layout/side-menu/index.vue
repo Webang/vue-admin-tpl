@@ -107,6 +107,11 @@ export default {
         },
         {
           name: '',
+          path: '/dataScreen',
+          label: '作战大屏'
+        },
+        {
+          name: '',
           path: '/components',
           label: '常用组件',
           children: [
