@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="home">
     <Header />
     <SideMenu :menu="menu" :activeMenu="activeMenu" />
     <div class="main">
       <div class="container">
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
-            <span>{{ item.meta.title }}</span>
+        <el-breadcrumb class="bread-crumb" separator="/">
+          <el-breadcrumb-item v-for="item in levelList" :key="item.path">
+            <span @click="handleClick(item)">{{ item.meta.title }}</span>
           </el-breadcrumb-item>
         </el-breadcrumb>
         <router-view />
@@ -61,18 +61,12 @@ export default {
   },
 
   methods: {
-    getBreadcrumb () { // only show routes with meta.title
+    handleClick (route) {
+      this.$router.push(route.path)
+    },
+    getBreadcrumb () {
       let matched = this.$route.matched
-      const first = matched[0]
-
-      console.log(matched)
-
-      // if (!this.isDashboard(first)) {
-      //   matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
-      // }
-
-      this.levelList = matched
-      // this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
+      this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
     }
   }
 }
@@ -86,5 +80,9 @@ export default {
 .container {
   padding-top: 12px;
   padding-left: 10px;
+}
+
+.bread-crumb {
+  padding-bottom: 20px;
 }
 </style>>

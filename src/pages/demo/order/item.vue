@@ -1,3 +1,5 @@
 <template>
-  <div>order-item</div>
+  <div class="order-item">
+    我是订单详情
+  </div>
 </template>
