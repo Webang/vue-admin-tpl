@@ -1,30 +1,58 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../pages/home'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
-    { // 先匹配login
+    {
       path: '/login',
-      component: () => import('../pages/login.vue')
+      component: () => import('../pages/demo/login')
     },
     {
       path: '/',
-      component: Home,
+      component: () => import('../components/layout/home'),
       children: [
         {
+          path: '/error',
+          component: () => import('../pages/demo/error'),
+          meta: {
+            title: '错误处理',
+            activeMenu: '' // 配置左侧菜单激活项
+          }
+        },
+        {
           path: '/chart/:chartType',
-          component: () => import('../pages/chart.vue')
+          component: () => import('../pages/demo/chart'),
+          meta: {
+            title: '图表'
+          }
+        },
+        {
+          path: '/lang',
+          component: () => import('../pages/demo/lang'),
+          meta: {
+            title: '多语言化'
+          }
         },
         {
           path: '/order',
-          component: () => import('../pages/order.vue')
+          component: () => import('../pages/demo/order/list'),
+          meta: {
+            title: '订单列表'
+          }
+        },
+        {
+          path: '/order/:orderId',
+          component: () => import('../pages/demo/order/item'),
+          meta: {
+            title: '订单详情'
+          }
         },
         {
           path: '*',
-          component: () => import('../pages/v404.vue')
+          component: () => import('../pages/demo/v404')
         }
       ]
     }
