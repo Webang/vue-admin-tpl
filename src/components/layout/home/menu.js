@@ -17,12 +17,12 @@ export default [
   {
     name: '',
     path: '/chart',
-    label: '图表展示',
+    label: '图标展示',
     children: [
       {
         name: '',
         path: '/chart/echart',
-        label: 'echart图标',
+        label: 'echart',
         children: [
           {
             name: '',
@@ -39,7 +39,7 @@ export default [
       {
         name: '',
         path: '/chart/highchart',
-        label: 'highchart图标',
+        label: 'highchart',
         children: [
           {
             name: '',

@@ -5,7 +5,7 @@
       :default-active="activeMenu"
       class="el-menu"
       text-color="#bfcbd9"
-      background-color="#545c64"
+      background-color="#001529"
       active-text-color="#ffd04b"
       :router="true"
       :unique-opened="true"
@@ -66,7 +66,7 @@ export default {
   height: 100%;
   position: fixed;
   font-size: 0;
-  top: 70px;
+  top: 60px;
   bottom: 0;
   left: 0;
   width: 200px;

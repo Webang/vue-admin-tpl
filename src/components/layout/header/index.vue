@@ -54,16 +54,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@header-height: 70px;
+@header-height: 60px;
 
 .header {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   height: @header-height;
-  font-size: 22px;
+  font-size: 18px;
   color: #fff;
-  background-color: #242f42;
+  background-color: #001529;
 }
 
 .menu-btn {
