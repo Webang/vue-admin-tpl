@@ -9,35 +9,83 @@ export default new Router({
   routes: [
     {
       path: '/login',
-      component: () => import('../pages/demo/login')
+      component: () => Layout
     },
     {
-      path: '/order',
-      component: Layout,
-      name: 'Order',
-      redirect: '/order/list',
-      meta: {
-        title: '订单列表'
-      },
+      name: 'Home',
+      path: '/',
+      component: () => import('../components/layout/home'),
       children: [
         {
-          path: 'list',
-          name: 'OrderList',
+          path: 'order',
           component: () => import('../pages/demo/order/list'),
+          name: 'Order',
           meta: {
-            title: '订单列表'
+            title: '第1级',
+            level: 1
           }
         },
         {
-          path: ':orderId',
+          path: 'order/:orderId',
           name: 'OrderItem',
           component: () => import('../pages/demo/order/item'),
           meta: {
-            title: '订单详情'
+            title: '第2级',
+            level: 2
+          }
+        },
+        {
+          path: 'order/:orderId/edit',
+          name: 'OrderItemEdit',
+          component: () => import('../pages/demo/order/edit'),
+          meta: {
+            title: '第3级',
+            level: 3
           }
         }
       ]
     }
+    // {
+    //   path: '/order',
+    //   component: Layout,
+    //   name: 'Order',
+    //   redirect: '/order/list',
+    //   meta: {
+    //     title: '订单列表',
+    //     level: 1
+    //   },
+    //   children: [
+    //     {
+    //       path: 'list',
+    //       name: 'OrderList',
+    //       component: () => import('../pages/demo/order/list'),
+    //       meta: {
+    //         title: '订单列表',
+    //         level: 1
+    //       }
+    //     },
+    //     {
+    //       path: ':orderId',
+    //       name: 'OrderItem',
+    //       component: () => import('../pages/demo/order/item'),
+    //       meta: {
+    //         title: '订单详情',
+    //         level: 2
+    //       },
+    //       children: [
+    //         {
+    //           path: 'edit',
+    //           name: 'OrderItemEdit',
+    //           component: () => import('../pages/demo/order/edit'),
+    //           meta: {
+    //             title: '订单编辑',
+    //             level: 3
+    //           }
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // }
     // {
     //   path: '/',
     //   component: () => import('../components/layout/home'),

@@ -2,7 +2,7 @@ export default [
   {
     name: '',
     path: '/order',
-    label: '子路由'
+    label: '面包屑'
   },
   {
     name: '',
