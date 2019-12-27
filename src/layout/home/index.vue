@@ -21,7 +21,6 @@
 import menu from './menu'
 import Header from '../header'
 import SideMenu from '../side-menu'
-import routeList from '@/router/routes'
 
 export default {
   name: 'Home',
@@ -74,8 +73,6 @@ export default {
     },
     getBreadcrumb () {
       const matched = this.$route.matched.filter(item => item.path)
-
-      console.log(routeList)
 
       const routes = [matched[0]]
       matched.forEach(el => {

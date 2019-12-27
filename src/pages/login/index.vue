@@ -9,11 +9,17 @@
       v-loading="loading"
     >
       <h3 class="title">系统登录</h3>
-      <el-form-item label="" prop="account">
+      <el-form-item label prop="account">
         <el-input placeholder="登录账户" type="text" v-model="ruleForm.account" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="" prop="password">
-        <el-input placeholder="登录密码" type="password" v-model="ruleForm.password" autocomplete="off" />
+      <el-form-item label prop="password">
+        <el-input
+          placeholder="登录密码"
+          show-password
+          type="password"
+          v-model="ruleForm.password"
+          autocomplete="off"
+        />
       </el-form-item>
       <el-button class="block" type="primary" size="large" @click="submitForm('ruleForm')">提交</el-button>
     </el-form>
@@ -22,6 +28,7 @@
 
 <script>
 export default {
+  name: 'login',
   data () {
     return {
       loading: false,
@@ -43,11 +50,10 @@ export default {
     },
     doLogin () {
       this.loading = true
-      setTimeout(() => {
+      this.$store.dispatch('user/login').then(() => {
         this.loading = false
-        window.localStorage.setItem('token', '150788199993X')
         this.$router.push('/')
-      }, 1500)
+      })
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

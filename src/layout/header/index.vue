@@ -6,12 +6,12 @@
     </div>
     <span class="logo">后台管理系统</span>
     <div class="header-right">
-      <div class="btn-screen">
+      <!-- <div class="btn-screen">
         <el-icon class="el-tooltip el-icon-rank" />
       </div>
       <div class="btn-bell">
         <el-icon class="el-icon-bell" />
-      </div>
+      </div> -->
       <div class="user-avator">
         <img src="./img/avatar.jpg" alt="">
       </div>
@@ -97,8 +97,8 @@ export default {
   .user-avator {
     img {
       display: block;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
     }
   }
