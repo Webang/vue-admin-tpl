@@ -3,7 +3,7 @@
     <Header />
     <SideMenu :menu="menu" :activeMenu="activeMenu" />
     <div class="container">
-      <el-breadcrumb class="bread-crumb" separator="/">
+      <el-breadcrumb class="bread-crumb" separator="/" v-if="showBreadCrumb">
         <el-breadcrumb-item v-for="(item, index) in levelList" :key="index">
           <router-link :to="item.path">
             <span>{{ item.meta.title }}</span>
@@ -21,6 +21,7 @@
 import menu from './menu'
 import Header from '../header'
 import SideMenu from '../side-menu'
+import routeList from '@/router/routes'
 
 export default {
   name: 'Home',
@@ -38,6 +39,9 @@ export default {
   },
 
   computed: {
+    showBreadCrumb () {
+      return !this.$route.hideBreadCrumb && this.$route.meta.title
+    },
     activeMenu () {
       const route = this.$route
       const { meta, path } = route
@@ -70,11 +74,17 @@ export default {
     },
     getBreadcrumb () {
       const matched = this.$route.matched.filter(item => item.path)
-      console.log(matched)
+
+      console.log(routeList)
+
       const routes = [matched[0]]
       matched.forEach(el => {
         if (el.meta.level > routes[routes.length - 1].meta.level) {
           routes.push(el)
+          Object.keys(this.$route.params).forEach(key => {
+            const name = ':' + key
+            el.path = el.path.replace(name, this.$route.params[key])
+          })
         }
       })
       this.levelList = routes

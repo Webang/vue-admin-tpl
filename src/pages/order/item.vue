@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'OrderItem'
+  name: 'order-item'
 }
 </script>

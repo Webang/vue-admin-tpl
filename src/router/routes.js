@@ -1,38 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const LayoutComponent = () => import('@/layout/home')
-
+const Layout = () => import('../components/layout/home')
 Vue.use(Router)
 
+// 1. 虽然可以通过给每一个页面去名字的方式来跳转, 但是也有path路径跳转的情况
 export const Home = 'Home'
 export const Order = 'Order'
 export const OrderList = 'OrderList'
 export const OrderItem = 'OrderItem'
-export const WorkBench = 'WorkBench'
 
-export const routes = [
+export default [
   {
     path: '/login',
-    name: 'login',
-    component: () => import('@/pages/login')
+    component: () => Layout
   },
   {
+    name: Home,
     path: '/',
-    component: LayoutComponent,
+    component: () => import('../components/layout/home'),
     children: [
-      {
-        name: WorkBench,
-        path: '',
-        component: () => import('@/pages/workbench/index'),
-        meta: {
-          title: '控制台'
-        }
-      },
       {
         name: Order,
         path: 'order',
-        component: () => import('@/pages/order/index'),
+        component: () => import('../pages/order/index'),
         redirect: '/order/list',
         meta: {
           title: '订单列表',
@@ -42,7 +33,7 @@ export const routes = [
           {
             name: OrderList,
             path: 'list',
-            component: () => import('@/pages/order/list'),
+            component: () => import('../pages/order/list'),
             meta: {
               title: '订单列表',
               level: 1
@@ -51,7 +42,7 @@ export const routes = [
           {
             name: OrderItem,
             path: ':orderId',
-            component: () => import('@/pages/order/item'),
+            component: () => import('../pages/order/item'),
             meta: {
               title: '订单详情',
               level: 2
@@ -60,7 +51,7 @@ export const routes = [
           {
             path: ':orderId/edit',
             name: 'OrderItemEdit',
-            component: () => import('@/pages/order/edit'),
+            component: () => import('../pages/order/edit'),
             meta: {
               title: '编辑订单',
               level: 3
@@ -71,7 +62,7 @@ export const routes = [
       // 错误
       {
         path: '/error',
-        component: () => import('@/pages/error'),
+        component: () => import('../pages/error'),
         meta: {
           title: '错误处理',
           activeMenu: '' // 配置左侧菜单激活项
@@ -130,25 +121,3 @@ export const routes = [
     ]
   }
 ]
-
-const router = new Router({
-  mode: 'history',
-  routes: routes
-})
-
-router.beforeEach((to, from, next) => {
-  const token = window.localStorage.getItem('token')
-  // console.log(to)
-  // next({
-  //   name: 'login'
-  // })
-  // console.log(to.name)
-  console.log(to)
-  if (!token && (to.name !== 'login')) {
-    next('/login')
-  } else {
-    next()
-  }
-})
-
-export default router

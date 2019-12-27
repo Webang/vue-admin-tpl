@@ -15,14 +15,14 @@
       <div class="user-avator">
         <img src="./img/avatar.jpg" alt="">
       </div>
-      <el-dropdown class="username">
-        <span class="">
+      <el-dropdown class="username" @command="handleCommand">
+        <span>
           <span style="color: #fff">admin</span>
           <i class="el-icon-arrow-down el-icon--right" style="color: #fff"/>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>修改信息</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+          <el-dropdown-item command="1">修改信息</el-dropdown-item>
+          <el-dropdown-item command="2">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -42,6 +42,12 @@ export default {
       window.localStorage.setItem('isToggle', '1')
       this.isToggle = !this.isToggle
       this.emitMenuState()
+    },
+    handleCommand (command) {
+      if (command === '2') {
+        window.localStorage.removeItem('token')
+        this.$router.push('/login')
+      }
     },
     emitMenuState () {
       EventBus.$emit('setMenuCollapseState', this.isToggle)

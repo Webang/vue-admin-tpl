@@ -1,6 +1,11 @@
 export default [
   {
     name: '',
+    path: '/',
+    label: '控制台'
+  },
+  {
+    name: '',
     path: '/order',
     label: '面包屑'
   },
