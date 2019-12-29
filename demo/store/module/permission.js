@@ -1,5 +1,7 @@
 import asyncRoutes from '@/router/asyncRoutes'
 import constantRoutes from '@/router/constantRoutes'
+import menu from '@/layout/home/menu'
+import { cloneDeep }  from 'lodash'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -14,6 +16,14 @@ function hasPermission (roles, route) {
   }
 }
 
+function hasMenuPermission(roles, menu) {
+  if (menu.roles && menu.roles.length ) {
+    return roles.some(role => menu.roles.includes(role))
+  } else {
+    return true
+  }
+}
+
 /**
  * Filter asynchronous routing tables by recursion
  * @param routes asyncRoutes
@@ -21,7 +31,6 @@ function hasPermission (roles, route) {
  */
 export function filterAsyncRoutes (routes, roles) {
   const res = []
-
   routes.forEach(route => {
     const tmp = { ...route }
     if (hasPermission(roles, tmp)) {
@@ -34,10 +43,25 @@ export function filterAsyncRoutes (routes, roles) {
   return res
 }
 
+export function filterMenu(menu, roles) {
+  const res = []
+  menu.forEach(element => {
+    const tmp = { ...element }
+    if (hasMenuPermission(roles, tmp)) {
+      if (tmp.children) {
+        tmp.children = filterAsyncRoutes(tmp.children, roles)
+      }
+      res.push(tmp)
+    }
+  })
+  return res
+}
+
 const state = {
   routes: [],
   addRoutes: [],
-  isAddRoute: false
+  isAddRoute: false,
+  menu: cloneDeep(menu)
 }
 
 const mutations = {
@@ -47,6 +71,9 @@ const mutations = {
   },
   SET_IS_ADD_ROUTE: (state, isAddRoute) => {
     state.isAddRoute = isAddRoute
+  },
+  SET_MENU: (state, menu) => {
+    state.menu = menu
   }
 }
 
@@ -61,6 +88,7 @@ const actions = {
       }
       commit('SET_IS_ADD_ROUTE', true)
       commit('SET_ROUTES', accessedRoutes)
+      commit('SET_MENU', filterMenu(menu, roles))
       resolve(accessedRoutes)
     })
   }

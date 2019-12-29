@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import menu from './menu'
 import Header from '../header'
 import SideBar from '../sideBar'
 import { mapState } from 'vuex'
@@ -32,12 +31,12 @@ export default {
   },
   data () {
     return {
-      menu: menu,
       levelList: []
     }
   },
   computed: {
     ...mapState({
+      menu: (state) => state.permission.menu,
       routes: (state) => state.permission.routes
     }),
     showBreadCrumb () {
@@ -45,7 +44,6 @@ export default {
     }
   },
   created () {
-    console.log(this.$route)
     this.initBreadCrumb()
     this.$watch('$route', this.initBreadCrumb)
   },

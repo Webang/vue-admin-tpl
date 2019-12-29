@@ -5,7 +5,8 @@ export default [
   },
   {
     path: '/order',
-    label: '订单管理'
+    label: '订单管理',
+    roles: []
   },
   {
     name: '',
@@ -15,12 +16,14 @@ export default [
       {
         name: '',
         path: '/permission',
-        label: '角色权限'
+        label: '角色权限',
+        roles: ['common']
       },
       {
         name: '',
         path: '/permission/page',
-        label: '页面权限'
+        label: '页面权限',
+        roles: ['admin']
       },
       {
         name: '',

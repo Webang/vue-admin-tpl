@@ -46,6 +46,7 @@ export default {
     handleCommand (command) {
       if (command === '2') {
         window.localStorage.removeItem('token')
+        this.$store.commit('permission/SET_IS_ADD_ROUTE', false)
         this.$router.push('/login')
       }
     },

@@ -4,7 +4,8 @@ export default[
     label : '控制面板'
   }, {
     path : '/order',
-    label : '订单管理'
+    label : '订单管理',
+    roles: ['common']
   }, {
     path : '/chart',
     label : '图表展示',
