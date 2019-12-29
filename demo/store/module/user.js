@@ -37,7 +37,7 @@ const actions = {
         commit('SET_TOKEN', '18644446666')
         commit('SET_ROLES', [userForm.role])
         resolve()
-      }, 1000)
+      }, 500)
     })
   }
 }
