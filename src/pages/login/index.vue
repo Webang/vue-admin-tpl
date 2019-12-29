@@ -21,6 +21,10 @@
           autocomplete="off"
         />
       </el-form-item>
+      <el-radio-group v-model="ruleForm.role" style="marginTop: 10px; marginBottom: 30px">
+        <el-radio label="admin">超级用户</el-radio>
+        <el-radio label="common">普通用户</el-radio>
+      </el-radio-group>
       <el-button class="block" type="primary" size="large" @click="submitForm('ruleForm')">提交</el-button>
     </el-form>
   </div>
@@ -34,7 +38,8 @@ export default {
       loading: false,
       ruleForm: {
         account: '',
-        password: ''
+        password: '',
+        role: 'admin'
       },
       rules: {
         account: [{ required: true, message: '请填写账户', trigger: 'blur' }],
@@ -50,7 +55,7 @@ export default {
     },
     doLogin () {
       this.loading = true
-      this.$store.dispatch('user/login').then(() => {
+      this.$store.dispatch('user/login', this.ruleForm).then(() => {
         this.loading = false
         this.$router.push('/')
       })

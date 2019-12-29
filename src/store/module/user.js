@@ -4,14 +4,13 @@ const state = {
   roles: []
 }
 
-const localToken = window.localStorage.getItem('token')
-const localUserInfo = window.localStorage.getItem('userInfo')
+let localRole = window.localStorage.getItem('role')
+let localToken = window.localStorage.getItem('token')
+let localUserInfo = window.localStorage.getItem('userInfo')
+
 if (localToken) state.token = localToken
 if (localUserInfo) state.userInfo = JSON.parse(localUserInfo)
-
-const roles = ['admin']
-const token = '18644446666'
-const userInfo = { username: 'Gaollard' }
+if (localRole) state.roles = [localRole]
 
 const mutations = {
   SET_USERINFO (state, userInfo) {
@@ -21,27 +20,22 @@ const mutations = {
   SET_TOKEN (state, token) {
     state.token = token
     window.localStorage.setItem('token', token)
+  },
+  SET_ROLES (state, roles) {
+    state.roles = roles
+    window.localStorage.setItem('role', roles[0])
   }
 }
 
 const actions = {
   // 用户登录
-  login ({ commit }) {
+  login ({ commit }, userForm) {
+    let userInfo = { username: 'Gaollard' }
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         commit('SET_USERINFO', userInfo)
-        commit('SET_TOKEN', token)
-        commit('SET_RI')
-        resolve()
-      }, 1000)
-    })
-  },
-  // 获取用户信息
-  getInfo ({ commit }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('SET_USERINFO', userInfo)
-        commit('SET_ROLES', roles)
+        commit('SET_TOKEN', '18644446666')
+        commit('SET_ROLES', [userForm.role])
         resolve()
       }, 1000)
     })

@@ -1,5 +1,5 @@
 <template>
-  <div class="side-menu">
+  <div class="sidebar">
     <el-menu
       :collapse="isCollapse"
       :default-active="activeMenu"
@@ -10,48 +10,38 @@
       :router="true"
       :unique-opened="true"
     >
-      <SubItem :menu="menu" />
+      <ChildMenu :menu="item" v-for="(item, index) in routes" :key="index" :base-path="item.path"/>
     </el-menu>
   </div>
 </template>
 
 <script>
-import EventBus from '@/utils/event-bus'
-import SubItem from './sub-item'
+// import EventBus from '@/utils/event-bus'
+import ChildMenu from './child'
 
 export default {
   components: {
-    SubItem
+    ChildMenu
   },
-
   props: {
-    menu: {
+    routes: {
       type: Array,
       default: () => []
-    },
-    activeMenu: {
-      type: String,
-      default: ''
     }
   },
-
   data () {
     return {
       isCollapse: false
     }
   },
-
-  mounted () {
-    EventBus.$on('setMenuCollapseState', val => (this.isCollapse = val))
-  },
-
-  destroyed () {
-    EventBus.$off('setMenuCollapseState')
-  },
-
-  methods: {
-    handleSelect (key, keyPath) {
-      this.$router.push(`${key}`)
+  computed: {
+    activeMenu () {
+      const route = this.$route
+      const { meta, path } = route
+      if (meta.activeMenu) {
+        return meta.activeMenu
+      }
+      return path
     }
   }
 }
@@ -62,7 +52,7 @@ export default {
   width: 200px;
 }
 
-.side-menu {
+.sidebar {
   height: 100%;
   position: fixed;
   font-size: 0;

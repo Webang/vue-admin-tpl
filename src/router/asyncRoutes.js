@@ -5,10 +5,11 @@ export default [
     path: '/permission',
     component: Layout,
     name: 'Permission',
+    redirect: '/permission/page', // 可能没有权限
     meta: {
       title: '权限管理',
       icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: ['admin', 'common']
     },
     children: [
       {
@@ -16,8 +17,8 @@ export default [
         component: () => import('@/pages/permission/page'),
         name: 'PagePermission',
         meta: {
-          title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
+          title: '页面权限',
+          roles: ['common']
         }
       },
       {
@@ -25,7 +26,7 @@ export default [
         component: () => import('@/pages/permission/role'),
         name: 'RolePermission',
         meta: {
-          title: 'Role Permission',
+          title: '角色权限',
           roles: ['admin']
         }
       }

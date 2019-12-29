@@ -17,7 +17,7 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done()
     } else {
       if (store.state.permission.isAddRoute) return next()
-      let routes = await store.dispatch('permission/generateRoutes')
+      let routes = await store.dispatch('permission/generateRoutes', store.state.user.roles)
       router.addRoutes(routes)
       next({ ...to, replace: true })
     }
