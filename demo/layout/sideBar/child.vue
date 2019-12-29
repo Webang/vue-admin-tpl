@@ -2,12 +2,14 @@
   <div class="menu">
     <template v-if="!menu.children">
       <el-menu-item :index="menu.path">
-        {{ menu.label }}
+        <el-icon class="el-icon-menu" />
+        <span>{{ menu.label }}</span>
       </el-menu-item>
     </template>
     <template v-else>
       <el-submenu :index="menu.path">
         <template slot="title">
+          <el-icon class="el-icon-menu" />
           <span>{{ menu.label }}</span>
         </template>
         <child-menu v-for="(item, index) in menu.children" :key="index" :menu="item"/>
