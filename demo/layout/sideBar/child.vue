@@ -1,24 +1,16 @@
 <template>
-  <div class="menu" v-if="!menu.hidden">
-    <template v-if="hasOneShowingChild(menu.children || [], menu) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!menu.alwaysShow">
-      <el-menu-item :index="resolvePath(onlyOneChild.path)">
-        <i class="el-icon-menu"></i>
-        <span slot="title">{{ onlyOneChild.meta.title }}</span>
+  <div class="menu">
+    <template v-if="!menu.children">
+      <el-menu-item :index="menu.path">
+        {{ menu.label }}
       </el-menu-item>
     </template>
-
     <template v-else>
-      <el-submenu :index="resolvePath(menu.path)">
+      <el-submenu :index="menu.path">
         <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span>{{ menu.meta.title }}</span>
+          <span>{{ menu.label }}</span>
         </template>
-        <child-menu
-          v-for="child in menu.children"
-          :key="child.path"
-          :menu="child"
-          :basePath="resolvePath(child.path)"
-        />
+        <child-menu v-for="(item, index) in menu.children" :key="index" :menu="item"/>
       </el-submenu>
     </template>
   </div>
@@ -32,10 +24,6 @@ export default {
     menu: {
       type: Object,
       default: () => {}
-    },
-    basePath: {
-      type: String,
-      default: ''
     }
   },
   data () {

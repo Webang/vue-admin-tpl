@@ -20,39 +20,79 @@ export default [
     }
   },
   {
+    path: '/chart',
+    component: Layout,
+    name: 'chart',
+    meta: { title: 'chart' },
+    redirect: '/chart/echart/line',
+    children: [
+      {
+        path: '/chart/echart',
+        component: () => import('@/pages/chart/echart/index'),
+        name: 'chartEchart',
+        meta: { title: 'echart' },
+        prev: 'chart',
+        redirect: '/chart/echart/line'
+      },
+      {
+        path: '/chart/echart/line',
+        component: () => import('@/pages/chart/echart/line'),
+        name: 'chartEchartLine',
+        meta: { title: '曲线图' },
+        prev: 'chartEchart'
+      },
+      {
+        path: '/chart/highchart',
+        component: () => import('@/pages/chart/highchart/index'),
+        name: 'chartHighchart',
+        meta: { title: 'highchart' },
+        prev: 'chart',
+        redirect: '/chart/highchart/line'
+      },
+      {
+        path: '/chart/highchart/line',
+        component: () => import('@/pages/chart/highchart/line'),
+        name: 'chartHighchartLine',
+        meta: { title: '曲线图' },
+        prev: 'chartHighchart'
+      }
+    ]
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/workbench',
     children: [
       {
-        path: 'workbench',
+        path: '/workbench',
         component: () => import('@/pages/workbench/index'),
         name: 'workbench',
         meta: { title: '控制面板' }
-      }
-    ]
-  },
-  {
-    path: '/order',
-    component: Layout,
-    redirect: '/order/list',
-    meta: {
-      title: '订单管理'
-    },
-    children: [
+      },
       {
-        path: 'list',
+        path: '/order',
+        name: 'OrderList',
         component: () => import('@/pages/order/list'),
         meta: {
           title: '订单列表'
         }
       },
       {
-        path: ':orderId',
+        path: '/order/:orderId',
+        name: 'OrderItem',
+        prev: 'OrderList',
         component: () => import('@/pages/order/item'),
-        hidden: true,
         meta: {
           title: '订单详情'
+        }
+      },
+      {
+        path: '/order/:orderId/edit',
+        name: 'OrderItemEdit',
+        prev: 'OrderItem',
+        component: () => import('@/pages/order/edit'),
+        meta: {
+          title: '订单编辑'
         }
       }
     ]

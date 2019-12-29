@@ -1,8 +1,11 @@
 export default [
   {
-    name: '',
     path: '/',
     label: '控制面板'
+  },
+  {
+    path: '/order',
+    label: '订单管理'
   },
   {
     name: '',

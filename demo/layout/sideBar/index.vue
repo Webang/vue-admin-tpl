@@ -10,13 +10,12 @@
       :router="true"
       :unique-opened="true"
     >
-      <ChildMenu :menu="item" v-for="(item, index) in routes" :key="index" :base-path="item.path"/>
+      <ChildMenu v-for="(item, index) in menu" :menu="item" :key="index"/>
     </el-menu>
   </div>
 </template>
 
 <script>
-// import EventBus from '@/utils/event-bus'
 import ChildMenu from './child'
 
 export default {
@@ -24,7 +23,7 @@ export default {
     ChildMenu
   },
   props: {
-    routes: {
+    menu: {
       type: Array,
       default: () => []
     }
@@ -38,10 +37,19 @@ export default {
     activeMenu () {
       const route = this.$route
       const { meta, path } = route
-      if (meta.activeMenu) {
-        return meta.activeMenu
+      if (meta.activeMenu) return meta.activeMenu
+
+      let activeIndex
+      const rawTree = (list) => {
+        list.forEach(element => {
+          if (path.indexOf(element.path) === 0) {
+            activeIndex = element.path
+          }
+          if (element.children) rawTree(element.children)
+        })
       }
-      return path
+      rawTree(this.menu)
+      return activeIndex
     }
   }
 }

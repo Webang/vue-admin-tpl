@@ -32,6 +32,7 @@ export default [
       }
     ]
   },
+  // 订单
   {
     path: '/order',
     component: Layout,
@@ -42,6 +43,7 @@ export default [
     children: [
       {
         path: 'list',
+        name: 'OrderList',
         component: () => import('@/pages/order/list'),
         meta: {
           title: '订单列表'
@@ -49,10 +51,21 @@ export default [
       },
       {
         path: ':orderId',
+        name: 'OrderItem',
         component: () => import('@/pages/order/item'),
         hidden: true,
         meta: {
-          title: '订单详情'
+          title: '订单详情',
+          prev: 'OrderList'
+        }
+      },
+      {
+        path: ':orderId/edit',
+        component: () => import('@/pages/order/edit'),
+        hidden: true,
+        meta: {
+          title: '订单编辑',
+          prev: 'OrderItem'
         }
       }
     ]
