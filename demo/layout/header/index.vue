@@ -4,14 +4,8 @@
       <el-icon v-if="!isToggle" class="el-icon-s-fold" />
       <el-icon v-else class="el-icon-s-unfold" />
     </div>
-    <span class="logo">后台管理系统</span>
+    <span class="logo">图表之美</span>
     <div class="header-right">
-      <!-- <div class="btn-screen">
-        <el-icon class="el-tooltip el-icon-rank" />
-      </div>
-      <div class="btn-bell">
-        <el-icon class="el-icon-bell" />
-      </div> -->
       <div class="user-avator">
         <img src="./img/avatar.jpg" alt="">
       </div>

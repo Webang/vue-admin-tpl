@@ -11,13 +11,21 @@ export default [
     }
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('@/pages/about'),
-    hidden: true,
+    path: '/analize',
+    component: Layout,
+    name: 'analize',
     meta: {
-      title: '关于我们'
-    }
+      title: 'analize'
+    },
+    redirect: '/analize/line',
+    children: [
+      {
+        path: 'line',
+        component: () => import('@/pages/analize/line'),
+        name: 'analize-line',
+        meta: { title: '折线图' }
+      }
+    ]
   },
   {
     path: '/chart',

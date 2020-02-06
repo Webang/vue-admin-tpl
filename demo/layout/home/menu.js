@@ -3,9 +3,42 @@ export default[
     path : '/workbench',
     label : '控制面板'
   }, {
-    path : '/order',
-    label : '订单管理',
-    roles: ['common']
+    path : '/analize',
+    label : '图表分类',
+    children: [
+      {
+        path: '/analize/line',
+        label: '折线图'
+      },
+      {
+        path: '/analize/column',
+        label: '柱状图'
+      },
+      {
+        path: '/analize/bar',
+        label: '条形图'
+      },
+      {
+        path: '/analize/pie',
+        label: '饼图'
+      },
+      {
+        path: '/analize/area',
+        label: '面积图'
+      },
+      {
+        path: '/analize/gauge',
+        label: '仪表盘'
+      },
+      {
+        path: '/analize/funnel',
+        label: '漏斗图'
+      },
+      {
+        path: '/analize/relation',
+        label: '关系图'
+      }
+    ]
   }, {
     path : '/chart',
     label : '图表展示',
@@ -30,23 +63,5 @@ export default[
         ]
       }
     ]
-  }, {
-    path : '/permission',
-    label : '权限管理',
-    children : [
-      {
-        path: '/permission/role',
-        label: '角色权限'
-      }, {
-        path: '/permission/page',
-        label: '页面权限'
-      }, {
-        path: '/permission/menu',
-        label: '动态菜单'
-      }
-    ]
-  }, {
-    path : '/error',
-    label : '错误处理'
   }
 ]
